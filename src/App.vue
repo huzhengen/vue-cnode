@@ -3,7 +3,7 @@
     <Header/>
     <div class="main">
       <router-view name="main"></router-view>
-      <SlideBar/>
+      <router-view name="slidebar"></router-view>
     </div>
   </div>
 </template>
@@ -33,6 +33,10 @@ body {
   font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma,
     "Hiragino Sans GB", STHeiti, sans-serif !important;
 }
+p {
+  margin: 0;
+  padding: 0;
+}
 ul,
 li,
 ol {
@@ -50,6 +54,12 @@ ol {
 a {
   text-decoration: none;
 }
+.clearfix:after,
+.clearfix:before {
+  display: table;
+  line-height: 0;
+  content: "";
+}
 img {
   height: auto;
   max-width: 100%;
@@ -66,16 +76,6 @@ img {
   margin: 10px auto;
 }
 /* .cell begin */
-.cell {
-  padding: 10px;
-  background: #fff;
-  border-top: 1px solid #f0f0f0;
-  position: relative;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 .cellleft {
   max-width: 100%;
 }
@@ -124,7 +124,7 @@ a.topic_title {
   color: #333;
 }
 a.topic_title {
-  max-width: 90%;
+  max-width: 79%;
   -o-text-overflow: ellipsis;
   white-space: nowrap;
   display: inline-block;

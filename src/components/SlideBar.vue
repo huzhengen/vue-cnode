@@ -2,128 +2,53 @@
   <div class="sidebar">
     <div class="panel">
       <div class="header">
-        <span class="col_fade">无人回复的话题</span>
+        <span class="col_fade">个人信息</span>
       </div>
       <div class="inner">
-        <ul class="unstyled">
-          <li>
-            <div>
-              <a
-                class="dark topic_title"
-                href="/topic/5c1c5edd76c4964062a1c252"
-                title="Vtiger CRM 几处SQL注入漏洞分析，测试工程师可借鉴"
-              >Vtiger CRM 几处SQL注入漏洞分析，测试工程师可借鉴</a>
+        <div class="user_card">
+          <div>
+            <a class="user_avatar" href="/user/afacode">
+              <img
+                src="https://avatars3.githubusercontent.com/u/24989232?v=4&amp;s=120"
+                title="afacode"
+              >
+            </a>
+            <span class="user_name">
+              <a class="dark" href="/user/afacode">afacode</a>
+            </span>
+
+            <div class="board clearfix">
+              <div class="floor">
+                <span class="big">积分: 95</span>
+              </div>
             </div>
-          </li>
-          <li>
-            <div>
-              <a
-                class="dark topic_title"
-                href="/topic/5c1c5a6376c4964062a1c216"
-                title="请问如何用cluster将不同http请求分发给不同进程处理"
-              >请问如何用cluster将不同http请求分发给不同进程处理</a>
-            </div>
-          </li>
-          <li>
-            <div>
-              <a
-                class="dark topic_title"
-                href="/topic/5c1c425c76c4964062a1c0ef"
-                title="前端导航网址分享，觉得有帮助的可以收藏下"
-              >前端导航网址分享，觉得有帮助的可以收藏下</a>
-            </div>
-          </li>
-          <li>
-            <div>
-              <a
-                class="dark topic_title"
-                href="/topic/5c1b6ea23898674067a7688e"
-                title="JavaScript基础——深入学习async/await"
-              >JavaScript基础——深入学习async/await</a>
-            </div>
-          </li>
-          <li>
-            <div>
-              <a
-                class="dark topic_title"
-                href="/topic/5c1b35b03898674067a765a7"
-                title="用Nodejs+WinSCP自动build完发布到服务器上"
-              >用Nodejs+WinSCP自动build完发布到服务器上</a>
-            </div>
-          </li>
-        </ul>
+            <div class="space clearfix"></div>
+            <span class="signature">
+              “
+              比较懒,有点爱折腾
+              ”
+            </span>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="panel">
       <div class="header">
-        <span class="col_fade">积分榜</span>
-        &nbsp;
-        <a class="dark" href="/users/top100">TOP 100 &gt;&gt;</a>
+        <span class="col_fade">无人回复的话题</span>
       </div>
       <div class="inner">
-        <ol>
-          <li>
-            <span class="top_score">21335</span>
-            <span class="user_name">
-              <a href="/user/i5ting">i5ting</a>
-            </span>
+        <ul class="unstyled">
+          <li v-for="value in noReply" :key="value.id">
+            <div>
+              <a
+                class="dark topic_title"
+                href="/topic/5c1c5edd76c4964062a1c252"
+                title="Vtiger CRM 几处SQL注入漏洞分析，测试工程师可借鉴"
+              >{{value.title}}</a>
+            </div>
           </li>
-          <li>
-            <span class="top_score">15335</span>
-            <span class="user_name">
-              <a href="/user/alsotang">alsotang</a>
-            </span>
-          </li>
-          <li>
-            <span class="top_score">9350</span>
-            <span class="user_name">
-              <a href="/user/leapon">leapon</a>
-            </span>
-          </li>
-          <li>
-            <span class="top_score">8760</span>
-            <span class="user_name">
-              <a href="/user/jiyinyiyong">jiyinyiyong</a>
-            </span>
-          </li>
-          <li>
-            <span class="top_score">7590</span>
-            <span class="user_name">
-              <a href="/user/atian25">atian25</a>
-            </span>
-          </li>
-          <li>
-            <span class="top_score">7035</span>
-            <span class="user_name">
-              <a href="/user/yakczh">yakczh</a>
-            </span>
-          </li>
-          <li>
-            <span class="top_score">6725</span>
-            <span class="user_name">
-              <a href="/user/im-here">im-here</a>
-            </span>
-          </li>
-          <li>
-            <span class="top_score">6055</span>
-            <span class="user_name">
-              <a href="/user/DevinXian">DevinXian</a>
-            </span>
-          </li>
-          <li>
-            <span class="top_score">5740</span>
-            <span class="user_name">
-              <a href="/user/chapgaga">chapgaga</a>
-            </span>
-          </li>
-          <li>
-            <span class="top_score">5330</span>
-            <span class="user_name">
-              <a href="/user/magicdawn">magicdawn</a>
-            </span>
-          </li>
-        </ol>
+        </ul>
       </div>
     </div>
   </div>
@@ -133,7 +58,31 @@
 export default {
   name: "SlideBar",
   data() {
-    return {};
+    return {
+      noReply: []
+    };
+  },
+  methods: {
+    getNoReplyData() {
+      this.$http
+        .get("https://cnodejs.org/api/v1/topics", {
+          page: 1,
+          limit: 20
+        })
+        .then(res => {
+          console.log(res);
+          let allData = res.data.data;
+          for (let value in allData) {
+            if (allData[value].reply_count === 0) {
+              this.noReply.push(allData[value]);
+            }
+          }
+        })
+        .catch(error => {});
+    }
+  },
+  beforeMount() {
+    this.getNoReplyData();
   }
 };
 </script>

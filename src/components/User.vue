@@ -3,88 +3,83 @@
     <div class="loading" v-if="isLoading">
       <img src="../assets/loading_circle_40b82ef.gif" alt>
     </div>
-    <div class="panel">
-      <div class="header">
-        <ul class="breadcrumb">
-          <li>
-            <a href="/">主页</a>
-            <span class="divider">/</span>
-          </li>
-        </ul>
-      </div>
-      <div class="inner userinfo">
-        <div class="user_big_avatar">
-          <img :src="userinfo.avatar_url" class="user_avatar" :title="userinfo.loginname">
-        </div>
-        <a class="dark">{{userinfo.loginname}}</a>
-        <div class="user_profile">
-          <ul class="unstyled">
-            <span class="big">{{userinfo.score}}</span>
-            积分
-            <li>
-              <i class="fa fa-lg fa-fw fa-github"></i>
-              <a class="dark" href="https://github.com/itchina110" target="_blank">@itchina110</a>
-            </li>
+    <div v-else>
+      <div class="panel">
+        <div class="header">
+          <ul class="breadcrumb">
+            <li>{{userinfo.loginname}}</li>
           </ul>
         </div>
-        <p class="col_fade">注册时间 {{userinfo.create_at | formatDate}}</p>
+        <div class="inner userinfo">
+          <div class="user_big_avatar">
+            <img :src="userinfo.avatar_url" class="user_avatar" :title="userinfo.loginname">
+          </div>
+          <a class="dark">{{userinfo.loginname}}</a>
+          <div class="user_profile">
+            <ul class="unstyled">
+              <span class="big">{{userinfo.score}}</span>
+              积分
+            </ul>
+          </div>
+          <p class="col_fade">注册时间 {{userinfo.create_at | formatDate}}</p>
+        </div>
       </div>
-    </div>
 
-    <div class="panel">
-      <div class="header">
-        <span class="col_fade">最近创建的话题</span>
-      </div>
-      <div class="cell" v-for="item in userinfo.recent_topics" :key="item.id">
-        <div class="cellleft">
-          <a class="user_avatar pull-left" :href="item.author.loginname">
-            <img :src="item.author.avatar_url" :title="item.author.loginname">
-          </a>
+      <div class="panel">
+        <div class="header">
+          <span class="col_fade">最近创建的话题</span>
+        </div>
+        <div class="cell" v-for="item in userinfo.recent_topics" :key="item.id">
+          <div class="cellleft">
+            <a class="user_avatar pull-left" :href="item.author.loginname">
+              <img :src="item.author.avatar_url" :title="item.author.loginname">
+            </a>
+            <router-link
+              :to="{name:'post_content',params:{id:item.id}}"
+              class="topic_title"
+              :title="item.title"
+            >{{item.title}}</router-link>
+          </div>
           <router-link
             :to="{name:'post_content',params:{id:item.id}}"
-            class="topic_title"
+            class="last_time pull-right"
             :title="item.title"
-          >{{item.title}}</router-link>
+          >
+            <span class="last_active_time">{{item.last_reply_at | formatDate}}</span>
+          </router-link>
         </div>
-        <router-link
-          :to="{name:'post_content',params:{id:item.id}}"
-          class="last_time pull-right"
-          :title="item.title"
-        >
-          <span class="last_active_time">{{item.last_reply_at | formatDate}}</span>
-        </router-link>
+
+        <div class="cell more">
+          <a class="dark" href="/user/lovevfp/topics">查看更多»</a>
+        </div>
       </div>
 
-      <div class="cell more">
-        <a class="dark" href="/user/lovevfp/topics">查看更多»</a>
-      </div>
-    </div>
-
-    <div class="panel">
-      <div class="header">
-        <span class="col_fade">最近参与的话题</span>
-      </div>
-      <div class="cell" v-for="item in userinfo.recent_replies" :key="item.id">
-        <div class="cellleft">
-          <a class="user_avatar pull-left" :href="item.author.loginname">
-            <img :src="item.author.avatar_url" :title="item.author.loginname">
-          </a>
+      <div class="panel">
+        <div class="header">
+          <span class="col_fade">最近参与的话题</span>
+        </div>
+        <div class="cell" v-for="item in userinfo.recent_replies" :key="item.id">
+          <div class="cellleft">
+            <a class="user_avatar pull-left" :href="item.author.loginname">
+              <img :src="item.author.avatar_url" :title="item.author.loginname">
+            </a>
+            <router-link
+              :to="{name:'post_content',params:{id:item.id}}"
+              class="topic_title"
+              :title="item.title"
+            >{{item.title}}</router-link>
+          </div>
           <router-link
             :to="{name:'post_content',params:{id:item.id}}"
-            class="topic_title"
+            class="last_time pull-right"
             :title="item.title"
-          >{{item.title}}</router-link>
+          >
+            <span class="last_active_time">{{item.last_reply_at | formatDate}}</span>
+          </router-link>
         </div>
-        <router-link
-          :to="{name:'post_content',params:{id:item.id}}"
-          class="last_time pull-right"
-          :title="item.title"
-        >
-          <span class="last_active_time">{{item.last_reply_at | formatDate}}</span>
-        </router-link>
-      </div>
-      <div class="cell more">
-        <a class="dark" href="/user/lovevfp/replies">查看更多»</a>
+        <div class="cell more">
+          <a class="dark" href="/user/lovevfp/replies">查看更多»</a>
+        </div>
       </div>
     </div>
   </div>
@@ -198,13 +193,6 @@ export default {
   width: 40px;
   height: 40px;
 }
-.panel .inner .unstyled li div,
-.topic_title_wrapper,
-.user_name,
-a.dark,
-a.topic_title {
-  text-overflow: ellipsis;
-}
 a.dark,
 a.dark:active,
 a.dark:link,
@@ -283,42 +271,14 @@ ul.unstyled {
   background: #fff;
   border-top: 1px solid #f0f0f0;
 }
-
-.content .changes,
-.cell,
-.unstyled li div,
-.user_name,
-a.dark,
-a.topic_title {
-  overflow: hidden;
-}
-
-.topic_title_wrapper {
-  white-space: nowrap;
-}
-
-.panel .inner .unstyled li div,
-.topic_title_wrapper,
-.user_name,
-a.dark,
-a.topic_title {
-  text-overflow: ellipsis;
-}
-
-.panel .inner .unstyled li div,
-.topic_title_wrapper,
-.user_name,
-a.dark,
-a.topic_title {
-  text-overflow: ellipsis;
-}
-
-.content .changes,
-.cell,
-.unstyled li div,
-.user_name,
-a.dark,
-a.topic_title {
-  overflow: hidden;
+.cell {
+  padding: 10px;
+  background: #fff;
+  border-top: 1px solid #f0f0f0;
+  position: relative;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 </style>

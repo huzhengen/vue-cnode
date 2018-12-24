@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Article from '../components/Article'
 import List from '../components/List'
 import User from '../components/User'
+import Sidebar from '../components/Sidebar'
 
 Vue.use(Router)
 
@@ -11,19 +12,22 @@ export default new Router({
         name: 'root',
         path: '/',
         components: {
-            main: List
+            main: List,
+            slidebar: Sidebar
         }
     }, {
         name: 'post_content',
         path: '/topic/:id',
         components: {
-            main: Article
+            main: Article,
+            slidebar: Sidebar
         }
     }, {
         name: 'user_info',
         path: '/user/:name',
         components: {
-            main: User
+            main: User,
+            slidebar: Sidebar
         }
     }]
 })

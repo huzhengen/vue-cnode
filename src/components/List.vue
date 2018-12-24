@@ -72,7 +72,6 @@ export default {
           limit: 20
         })
         .then(res => {
-          console.log(res);
           this.isLoading = false;
           this.listsData = res.data.data;
         })
@@ -137,6 +136,16 @@ export default {
 }
 .topic_title_wrapper {
   white-space: nowrap;
+}
+.cell {
+  padding: 10px;
+  background: #fff;
+  border-top: 1px solid #f0f0f0;
+  position: relative;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 @media (max-width: 768px) {
   .user_avatar,

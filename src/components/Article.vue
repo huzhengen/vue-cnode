@@ -9,10 +9,10 @@
           <span class="topic_full_title">{{post.title}}</span>
           <div class="changes">
             <span>发布于 {{post.create_at | formatDate}}</span>
-            {{post.last_reply_at | formatDate}}
-            <span>
-              作者
-              <a href="/user/hhffhh">{{post.author.loginname}}</a>
+            <span>作者
+              <router-link
+                to="{name:'user_info',params:{name:post.author.loginname}}"
+              >{{post.author.loginname}}</router-link>
             </span>
             <span>{{post.visit_count}} 次浏览</span>
             
@@ -43,16 +43,16 @@
               <img :src="reply.author.avatar_url" :title="reply.author.loginname">
             </router-link>
             <div class="user_info">
-              <a class="dark reply_author" href="/user/zlyuanteng">{{reply.author.loginname}}</a>
-              <a
-                class="reply_time"
-                href="#5c0cfc877ec239239ff5502c"
-              >{{index+1}}楼•{{reply.create_at | formatDate}} 天前</a>
+              <router-link
+                class="dark reply_author"
+                to="{name:'user_info',params:{name:reply.author.loginname}}"
+              >{{reply.author.loginname}}</router-link>
+              <a class="reply_time">{{index+1}}楼•{{reply.create_at | formatDate}} 天前</a>
             </div>
             <div class="user_action">
               <span>
-                <i class="fa up_btn fa-thumbs-o-up invisible" title="喜欢"></i>
-                <span class="up-count"></span>
+                <i class="fa up_btn fa-thumbs-o-up" title="喜欢" v-if="reply.ups.length > 0">赞</i>
+                <span class="up-count" v-if="reply.ups.length > 0">{{reply.ups.length}}</span>
               </span>
               <span></span>
             </div>
@@ -131,6 +131,9 @@ a.topic_title {
   font-size: 12px;
   color: #838383;
 }
+.content .changes span {
+  padding-right: 5px;
+}
 .content .changes span:before {
   content: "•";
 }
@@ -204,11 +207,36 @@ textarea#title {
 }
 .reply_time {
   font-size: 11px;
+  padding-left: 5px;
 }
 .user_action {
   float: right;
   margin-left: 20px;
   font-size: 15px;
+}
+
+.fa {
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fa,
+.fa-stack {
+  display: inline-block;
+}
+.up_btn {
+  cursor: pointer;
+  opacity: 0.4;
+}
+.fa {
+  color: #000;
+  opacity: 0.4;
+}
+.user_action .up-count {
+  color: gray;
 }
 .reply_content {
   padding-left: 50px;
@@ -227,5 +255,74 @@ a.dark:visited {
 a {
   color: #08c;
   text-decoration: none;
+}
+div pre.prettyprint {
+  font-size: 14px;
+  border-radius: 0;
+  padding: 0 15px;
+  border: none;
+  margin: 20px -10px;
+  border-width: 1px 0;
+  background: #f7f7f7;
+  -o-tab-size: 4;
+  -moz-tab-size: 4;
+  tab-size: 4;
+}
+pre code {
+  color: inherit;
+  white-space: pre-wrap;
+  background-color: transparent;
+}
+fieldset,
+legend,
+pre code {
+  padding: 0;
+  border: 0;
+}
+.clo,
+.opn,
+.pun {
+  color: #660;
+}
+.pln {
+  color: #000;
+}
+.user_card .user_avatar {
+  vertical-align: middle;
+  margin-right: 0.5em;
+}
+.user_card .user_avatar img {
+  width: 48px;
+  height: 48px;
+}
+
+.user_avatar img,
+.user_big_avatar img {
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+}
+.user_card .user_name {
+  font-size: 16px;
+}
+
+.user_name {
+  max-width: 120px;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
+}
+.panel .inner a {
+  color: #778087;
+}
+.board {
+  margin-top: 10px;
+  width: 80%;
+}
+.big {
+  font-size: 14px;
+}
+.signature {
+  font-style: italic;
 }
 </style>
