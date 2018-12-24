@@ -6,11 +6,6 @@ import router from './router/index'
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
-new Vue({
-    router,
-    render: h => h(App),
-}).$mount('#app')
-
 Vue.filter('formatDate', (str) => {
     if (!str) return ''
     let date = new Date(str)
@@ -48,3 +43,8 @@ Vue.filter('tabFormater', (value) => {
         return '招聘'
     }
 })
+
+new Vue({
+    router,
+    render: h => h(App),
+}).$mount('#app')

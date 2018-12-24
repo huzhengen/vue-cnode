@@ -3,60 +3,64 @@
     <div class="loading" v-if="isLoading">
       <img src="../assets/loading_circle_40b82ef.gif" alt>
     </div>
-    <div class="panel">
-      <div class="header topic_header">
-        <span class="topic_full_title">{{post.title}}</span>
-        <div class="changes">
-          <span>发布于 {{post.create_at | formatDate}}</span>
-          <span>
-            作者
-            <a href="/user/hhffhh">{{post.author.loginname}}</a>
-          </span>
-          <span>{{post.visit_count}} 次浏览</span>
-          
-          <span>来自 {{post | tabFormater}}</span>
-        </div>
-      </div>
-      <div class="inner topic">
-        <div class="topic_content" v-html="post.content"></div>
-      </div>
-    </div>
-
-    <div class="panel">
-      <div class="header">
-        <span class="col_fade">{{post.replies.length}} 回复</span>
-      </div>
-      <div
-        class="cell reply_area reply_item"
-        reply_id="5c0cfc877ec239239ff5502c"
-        reply_to_id
-        id="5c0cfc877ec239239ff5502c"
-        v-for="{reply, index} in post.replies"
-        :key="index"
-      >
-        <div class="author_content">
-          <a href="/user/zlyuanteng" class="user_avatar">
-            <img :src="reply.author.avatar_url" title="reply.loginname">
-          </a>
-
-          <div class="user_info">
-            <a class="dark reply_author" href="/user/zlyuanteng">{{reply.loginname}}</a>
-            <a
-              class="reply_time"
-              href="#5c0cfc877ec239239ff5502c"
-            >{{index}}楼•{{create_at | formatDate}} 天前</a>
-          </div>
-          <div class="user_action">
+    <div v-else>
+      <div class="panel">
+        <div class="header topic_header">
+          <span class="topic_full_title">{{post.title}}</span>
+          <div class="changes">
+            <span>发布于 {{post.create_at | formatDate}}</span>
+            {{post.last_reply_at | formatDate}}
             <span>
-              <i class="fa up_btn fa-thumbs-o-up invisible" title="喜欢"></i>
-              <span class="up-count"></span>
+              作者
+              <a href="/user/hhffhh">{{post.author.loginname}}</a>
             </span>
-            <span></span>
+            <span>{{post.visit_count}} 次浏览</span>
+            
+            <span>来自 {{post | tabFormater}}</span>
           </div>
         </div>
-        <div class="reply_content from-zlyuanteng" v-html="reply.content"></div>
-        <div class="clearfix">
-          <div class="reply2_area"></div>
+        <div class="inner topic">
+          <div class="topic_content" v-html="post.content"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="header">
+          <span class="col_fade">{{post.reply_count}} 回复</span>
+        </div>
+        <div
+          class="cell reply_area reply_item"
+          :reply_id="post.id"
+          :id="post.id"
+          v-for="(reply, index) in post.replies"
+          :key="index"
+        >
+          <div class="author_content">
+            <router-link
+              class="user_avatar"
+              :to="{name:'user_info',params:{name:reply.author.loginname}}"
+            >
+              <img :src="reply.author.avatar_url" :title="reply.author.loginname">
+            </router-link>
+            <div class="user_info">
+              <a class="dark reply_author" href="/user/zlyuanteng">{{reply.author.loginname}}</a>
+              <a
+                class="reply_time"
+                href="#5c0cfc877ec239239ff5502c"
+              >{{index+1}}楼•{{reply.create_at | formatDate}} 天前</a>
+            </div>
+            <div class="user_action">
+              <span>
+                <i class="fa up_btn fa-thumbs-o-up invisible" title="喜欢"></i>
+                <span class="up-count"></span>
+              </span>
+              <span></span>
+            </div>
+          </div>
+          <div class="reply_content from-zlyuanteng" v-html="reply.content"></div>
+          <div class="clearfix">
+            <div class="reply2_area"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -77,7 +81,7 @@ export default {
       this.$http
         .get(`https://cnodejs.org/api/v1/topic/${this.$route.params.id}`)
         .then(res => {
-          console.log(res);
+          console.log(res.data.data);
           this.isLoading = false;
           this.post = res.data.data;
         })
@@ -209,5 +213,19 @@ textarea#title {
 .reply_content {
   padding-left: 50px;
   color: #333;
+}
+.panel .markdown-text a {
+  color: #08c;
+}
+a.dark,
+a.dark:active,
+a.dark:link,
+a.dark:visited {
+  color: #666;
+  text-decoration: none;
+}
+a {
+  color: #08c;
+  text-decoration: none;
 }
 </style>

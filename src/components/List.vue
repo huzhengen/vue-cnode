@@ -16,9 +16,13 @@
           </div>
           <div class="cell" v-for="value in listsData" :key="value.id" v-else>
             <div class="cellleft">
-              <a class="user_avatar pull-left" :href="value.author.loginname">
-                <img :src="value.author.avatar_url" title="value.author.loginname">
-              </a>
+              <router-link
+                :to="{name:'user_info',params:{name:value.author.loginname}}"
+                class="user_avatar pull-left"
+              >
+                <img :src="value.author.avatar_url" :title="value.author.loginname">
+              </router-link>
+
               <span class="reply_count pull-left">
                 <span class="count_of_replies" title="回复数">{{value.reply_count}}</span>
                 <span class="count_seperator">/</span>
@@ -34,19 +38,16 @@
               <router-link
                 :to="{name:'post_content',params:{id:value.id}}"
                 class="topic_title"
-                title="value.title"
+                :title="value.title"
               >{{value.title}}</router-link>
             </div>
-            <a
+            <router-link
+              :to="{name:'post_content',params:{id:value.id}}"
               class="last_time pull-right"
-              href="/topic/5c19b97e76c4964062a1b295#5c1c595876c4964062a1c1fc"
+              :title="value.title"
             >
-              <img
-                class="user_small_avatar"
-                src="https://avatars1.githubusercontent.com/u/3838050?v=4&amp;s=120"
-              >
               <span class="last_active_time">{{value.last_reply_at | formatDate}}</span>
-            </a>
+            </router-link>
           </div>
         </div>
       </div>
@@ -87,77 +88,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.loading {
-  width: 50px;
-  margin: 10px auto;
-}
-.cell {
-  padding: 10px;
-  background: #fff;
-  border-top: 1px solid #f0f0f0;
-  position: relative;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.cellleft {
-  max-width: 100%;
-}
-.cell:first-child {
-  border-top: none;
-}
-.cell a {
-  color: #778087;
-}
-.cell .user_avatar > img {
-  width: 30px;
-  height: 30px;
-  border-radius: 3px;
-  vertical-align: middle;
-}
-.cell .reply_count {
-  width: 70px;
-  display: inline-block;
-  text-align: center;
-}
-.cell .count_of_replies {
-  color: #9e78c0;
-}
-.cell .count_seperator {
-  font-size: 10px;
-  margin: 0 1px;
-}
-.cell .count_of_visits {
-  font-size: 10px;
-  color: #b4b4b4;
-}
-.last_time .user_small_avatar {
-  height: 18px;
-  width: 18px;
-  vertical-align: middle;
-  margin-right: 0.5em;
-  border-radius: 3px;
-}
-
-.topic_list a.topic_title:visited {
-  color: #888;
-}
-.topic_list a.topic_title {
-  color: #333;
-}
-a.topic_title {
-  max-width: 70%;
-  -o-text-overflow: ellipsis;
-  white-space: nowrap;
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 16px;
-  line-height: 30px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  padding: 0 0 0 10px;
-}
 .panel .header {
   padding: 10px;
   background-color: #f6f6f6;
