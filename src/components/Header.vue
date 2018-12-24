@@ -51,7 +51,6 @@ export default {
 }
 .container {
   width: 100%;
-  min-width: 960px;
   margin: 0 auto;
   max-width: 1400px;
   display: flex;

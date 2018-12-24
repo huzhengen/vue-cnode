@@ -1,91 +1,6 @@
 <template>
   <div class="sidebar">
     <div class="panel">
-      <div class="inner">
-        <p>CNode：Node.js专业中文社区</p>
-
-        <div>
-          您可以
-          <a href="/signin">登录</a>
-          或
-          <a href="/signup">注册</a>
-          , 也可以
-          <a href="/auth/github">
-            <span class="span-info">通过 GitHub 登录</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel">
-      <div class="inner ads">
-        <a
-          href="https://seeconf.antfin.com/?from=cnode"
-          target="_blank"
-          class="banner sponsor_outlink"
-          data-label="see_conf_2019"
-        >
-          <img src="//static.cnodejs.org/Fl_LDJY2VdTy0g060A8jm75dnufL">
-        </a>
-
-        <div class="sep10"></div>
-
-        <a
-          href="https://www.aliyun.com/product/nodejs?ref=cnode"
-          target="_blank"
-          class="banner sponsor_outlink"
-          data-label="alinode"
-        >
-          <img src="//static.cnodejs.org/Fn4D6BhOTz1IswvmzeZ1q7QW1ls_">
-        </a>
-
-        <div class="sep10"></div>
-
-        <a
-          href="https://render.alipay.com/p/s/taobaonpm_click/image_click_25"
-          target="_blank"
-          class="banner sponsor_outlink"
-          data-label="aliyun"
-        >
-          <img src="https://render.alipay.com/p/s/taobaonpm_click/image_25">
-        </a>
-
-        <div class="sep10"></div>
-
-        <a
-          href="https://www.ucloud.cn/site/active/gift.html?utm_source=cnodejs&amp;utm_medium=content_pic_pc_540_130&amp;utm_campaign=huodong&amp;utm_content=gift&amp;ytag=cnodejs"
-          target="_blank"
-          class="banner sponsor_outlink"
-          data-label="ucloud-banner"
-        >
-          <img src="//static.cnodejs.org/FlajCCXkxZaOsuWp3k0iaiqfrJaS">
-        </a>
-
-        <div class="sep10"></div>
-
-        <a
-          href="https://0x7.me/UDyj"
-          target="_blank"
-          class="banner sponsor_outlink"
-          data-label="qiniu-sidebar"
-        >
-          <img src="//static.cnodejs.org/Fv9R31Y6ySKKJi95ldk9TRkJ7o5O">
-        </a>
-
-        <div class="sep10"></div>
-
-        <a
-          href="http://d2forum.alibaba-inc.com/?from=cnode"
-          target="_blank"
-          class="banner sponsor_outlink"
-          data-label="d2-sidebar"
-        >
-          <img src="//static.cnodejs.org/Fssu56hfLTZbS0QWUrTq_Cj_tpmO">
-        </a>
-      </div>
-    </div>
-
-    <div class="panel">
       <div class="header">
         <span class="col_fade">无人回复的话题</span>
       </div>
@@ -211,49 +126,6 @@
         </ol>
       </div>
     </div>
-
-    <div class="panel">
-      <div class="header">
-        <span class="col_fade">友情社区</span>
-      </div>
-      <div class="inner">
-        <ol class="friendship-community">
-          <li>
-            <a href="https://ruby-china.org/" target="_blank">
-              <img src="//static2.cnodejs.org/public/images/ruby-china-20150529.png">
-            </a>
-          </li>
-          <div class="sep10"></div>
-          <li>
-            <a href="http://golangtc.com/" target="_blank">
-              <img src="//static2.cnodejs.org/public/images/golangtc-logo.png">
-            </a>
-          </li>
-          <div class="sep10"></div>
-          <li>
-            <a href="http://phphub.org/" target="_blank">
-              <img src="//static2.cnodejs.org/public/images/phphub-logo.png">
-            </a>
-          </li>
-          <div class="sep10"></div>
-          <li>
-            <a href="https://testerhome.com/" target="_blank">
-              <img src="//static.cnodejs.org/FjLUc7IJ2--DqS706etPQ1EGajxK">
-            </a>
-          </li>
-        </ol>
-      </div>
-    </div>
-    <div class="panel">
-      <div class="header">
-        <span class="col_fade">客户端二维码</span>
-      </div>
-      <div class="inner cnode-app-download">
-        <img width="200" src="//static.cnodejs.org/FtG0YVgQ6iginiLpf9W4_ShjiLfU">
-        <br>
-        <a href="https://github.com/soliury/noder-react-native" target="_blank">客户端源码地址</a>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -269,10 +141,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .sidebar {
-  width: 290px;
+  flex: 0 0 290px;
   font-size: 14px;
   float: right;
   margin-bottom: 20px;
+}
+.sidebar .panel {
+  font-size: 13px;
 }
 .panel {
   margin-bottom: 13px;
@@ -283,6 +158,51 @@ export default {
   background-color: #fff;
   font-size: 13px;
 }
+.panel .inner a {
+  color: #778087;
+}
+a.topic_title {
+  max-width: 70%;
+  -o-text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 16px;
+  line-height: 30px;
+}
+.sidebar .header {
+  color: #51585c;
+  border-radius: 3px 3px 0 0;
+}
+.header .col_fade {
+  color: #444;
+}
+a.dark,
+a.dark:active,
+a.dark:link,
+a.dark:visited {
+  color: #666;
+  text-decoration: none;
+}
+.sidebar .inner ol {
+  margin: 4px 0;
+  list-style: none;
+}
+.panel .inner,
+.panel .inner li {
+  line-height: 2em;
+}
+.top_score {
+  color: gray;
+  padding: 2px;
+  margin-right: 10px;
+}
+.user_name {
+  max-width: 120px;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
+}
 .panel .header {
   padding: 10px;
   background-color: #f6f6f6;
@@ -291,5 +211,40 @@ export default {
 }
 .header .col_fade {
   color: #444;
+}
+ol.inline,
+ol.unstyled,
+ul.inline,
+ul.unstyled {
+  margin-left: 0;
+  list-style: none;
+}
+.panel .inner,
+.panel .inner li {
+  line-height: 2em;
+}
+.panel .inner .unstyled li div,
+.topic_title_wrapper,
+.user_name,
+a.dark,
+a.topic_title {
+  text-overflow: ellipsis;
+}
+.content .changes,
+.cell,
+.unstyled li div,
+.user_name,
+a.dark,
+a.topic_title {
+  overflow: hidden;
+}
+.sidebar .topic_title {
+  max-width: 270px;
+  font-size: 14px;
+}
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
 }
 </style>

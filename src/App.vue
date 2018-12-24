@@ -2,7 +2,7 @@
   <div id="app">
     <Header/>
     <div class="main">
-      <List/>
+      <router-view name="main"></router-view>
       <SlideBar/>
     </div>
   </div>
@@ -25,7 +25,6 @@ export default {
 
 <style>
 body {
-  height: 1000px;
   margin: 0;
   padding: 0;
   line-height: 20px;
@@ -42,11 +41,9 @@ ol {
   list-style: none;
 }
 .main {
-  width: 90%;
+  width: 95%;
   max-width: 1400px;
-  min-width: 960px;
   margin: 15px auto;
-  min-height: 400px;
   display: flex;
   justify-content: space-between;
 }
@@ -59,5 +56,9 @@ img {
   vertical-align: middle;
   border: 0;
   -ms-interpolation-mode: bicubic;
+}
+.content {
+  flex: 1 1 auto;
+  margin-right: 15px;
 }
 </style>
