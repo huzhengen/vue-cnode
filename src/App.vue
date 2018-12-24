@@ -136,4 +136,152 @@ a.topic_title {
   padding: 0 0 0 10px;
 }
 /* .cell end */
+/* sidebar begin */
+.sidebar {
+  flex: 0 0 290px;
+  font-size: 14px;
+  float: right;
+  margin-bottom: 20px;
+}
+.sidebar .panel {
+  font-size: 13px;
+}
+.panel {
+  margin-bottom: 13px;
+}
+.panel .inner {
+  padding: 10px;
+  border-radius: 0 0 3px 3px;
+  background-color: #fff;
+  font-size: 13px;
+}
+.panel .inner a {
+  color: #778087;
+}
+a.topic_title {
+  max-width: 70%;
+  -o-text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 16px;
+  line-height: 30px;
+}
+.sidebar .header {
+  color: #51585c;
+  border-radius: 3px 3px 0 0;
+}
+.header .col_fade {
+  color: #444;
+}
+a.dark,
+a.dark:active,
+a.dark:link,
+a.dark:visited {
+  color: #666;
+  text-decoration: none;
+}
+.sidebar .inner ol {
+  margin: 4px 0;
+  list-style: none;
+}
+.panel .inner,
+.panel .inner li {
+  line-height: 2em;
+}
+.top_score {
+  color: gray;
+  padding: 2px;
+  margin-right: 10px;
+}
+.user_name {
+  max-width: 120px;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
+}
+.panel .header {
+  padding: 10px;
+  background-color: #f6f6f6;
+  color: #51585c;
+  border-radius: 3px 3px 0 0;
+}
+.header .col_fade {
+  color: #444;
+}
+ol.inline,
+ol.unstyled,
+ul.inline,
+ul.unstyled {
+  margin-left: 0;
+  list-style: none;
+}
+.panel .inner,
+.panel .inner li {
+  line-height: 2em;
+}
+.panel .inner .unstyled li div,
+.topic_title_wrapper,
+.user_name,
+a.dark,
+a.topic_title {
+  text-overflow: ellipsis;
+}
+.content .changes,
+.cell,
+.unstyled li div,
+.user_name,
+a.dark,
+a.topic_title {
+  overflow: hidden;
+}
+.sidebar .topic_title {
+  max-width: 270px;
+  font-size: 14px;
+}
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+.user_card .user_avatar {
+  vertical-align: middle;
+  margin-right: 0.5em;
+}
+.user_card .user_avatar img {
+  width: 48px;
+  height: 48px;
+}
+
+.user_avatar img,
+.user_big_avatar img {
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+}
+.user_card .user_name {
+  font-size: 16px;
+}
+
+.user_name {
+  max-width: 120px;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
+}
+.panel .inner a {
+  color: #778087;
+}
+.board {
+  margin-top: 10px;
+  width: 80%;
+}
+.big {
+  font-size: 14px;
+}
+.signature {
+  font-style: italic;
+}
+/* sidebar end */
 </style>

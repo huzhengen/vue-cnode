@@ -35,13 +35,13 @@
               <img :src="item.author.avatar_url" :title="item.author.loginname">
             </a>
             <router-link
-              :to="{name:'post_content',params:{id:item.id}}"
+              :to="{name:'post_content',params:{id:item.id,name:item.author.loginname}}"
               class="topic_title"
               :title="item.title"
             >{{item.title}}</router-link>
           </div>
           <router-link
-            :to="{name:'post_content',params:{id:item.id}}"
+            :to="{name:'post_content',params:{id:item.id,name:item.author.loginname}}"
             class="last_time pull-right"
             :title="item.title"
           >
@@ -64,13 +64,13 @@
               <img :src="item.author.avatar_url" :title="item.author.loginname">
             </a>
             <router-link
-              :to="{name:'post_content',params:{id:item.id}}"
+              :to="{name:'post_content',params:{id:item.id,name:item.author.loginname}}"
               class="topic_title"
               :title="item.title"
             >{{item.title}}</router-link>
           </div>
           <router-link
-            :to="{name:'post_content',params:{id:item.id}}"
+            :to="{name:'post_content',params:{id:item.id,name:item.author.loginname}}"
             class="last_time pull-right"
             :title="item.title"
           >

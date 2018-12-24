@@ -36,7 +36,7 @@
             }]"
               >{{value | tabFormater}}</span>
               <router-link
-                :to="{name:'post_content',params:{id:value.id}}"
+                :to="{name:'post_content',params:{id:value.id,name:value.author.loginname}}"
                 class="topic_title"
                 :title="value.title"
               >{{value.title}}</router-link>

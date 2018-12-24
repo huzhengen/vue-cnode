@@ -45,7 +45,7 @@
             <div class="user_info">
               <router-link
                 class="dark reply_author"
-                to="{name:'user_info',params:{name:reply.author.loginname}}"
+                :to="{name:'user_info',params:{name:reply.author.loginname}}"
               >{{reply.author.loginname}}</router-link>
               <a class="reply_time">{{index+1}}楼•{{reply.create_at | formatDate}} 天前</a>
             </div>
@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import bus from "../bus/index";
 export default {
   name: "List",
   data() {
@@ -81,11 +82,18 @@ export default {
       this.$http
         .get(`https://cnodejs.org/api/v1/topic/${this.$route.params.id}`)
         .then(res => {
-          console.log(res.data.data);
           this.isLoading = false;
           this.post = res.data.data;
+          console.log(this.post.author.loginname);
+          bus.$emit("loginname", this.post.author.loginname);
         })
         .catch(error => {});
+    }
+  },
+  watch: {
+    $route(to, from) {
+      // 通过 id 获取文章详情
+      this.getArticleData();
     }
   },
   beforeMount() {
@@ -287,42 +295,15 @@ pre code {
 .pln {
   color: #000;
 }
-.user_card .user_avatar {
-  vertical-align: middle;
-  margin-right: 0.5em;
+blockquote {
+  padding: 0 0 0 15px;
+  margin: 0 0 20px;
+  border-left: 5px solid #eee;
 }
-.user_card .user_avatar img {
-  width: 48px;
-  height: 48px;
-}
-
-.user_avatar img,
-.user_big_avatar img {
-  width: 30px;
-  height: 30px;
-  border-radius: 3px;
-}
-.user_card .user_name {
-  font-size: 16px;
-}
-
-.user_name {
-  max-width: 120px;
-  white-space: nowrap;
-  display: inline-block;
-  vertical-align: middle;
-}
-.panel .inner a {
-  color: #778087;
-}
-.board {
-  margin-top: 10px;
-  width: 80%;
-}
-.big {
-  font-size: 14px;
-}
-.signature {
-  font-style: italic;
+blockquote:after,
+blockquote:before,
+q:after,
+q:before {
+  content: "";
 }
 </style>
