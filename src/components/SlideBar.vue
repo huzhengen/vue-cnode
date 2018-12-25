@@ -24,14 +24,46 @@
                 <span class="big">积分: {{userinfo.score}}</span>
               </div>
             </div>
-            <div class="space clearfix"></div>
-            <span class="signature">
-              “
-              比较懒,有点爱折腾
-              ”
-            </span>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="panel" v-if="userinfo.recent_topics">
+      <div class="header">
+        <span class="col_fade">作者最近创建的主题</span>
+      </div>
+      <div class="inner">
+        <ul class="unstyled">
+          <li v-for="list in topicLimit" :key="list.id">
+            <div>
+              <router-link
+                :to="{name:'post_content',params:{id:list.id,name:list.author.loginname}}"
+                class="dark topic_title"
+                :title="list.title"
+              >{{list.title}}</router-link>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel" v-if="userinfo.recent_replies">
+      <div class="header">
+        <span class="col_fade">作者最近回复的主题</span>
+      </div>
+      <div class="inner">
+        <ul class="unstyled">
+          <li v-for="list in replyTopicLimit" :key="list.id">
+            <div>
+              <router-link
+                :to="{name:'post_content',params:{id:list.id,name:list.author.loginname}}"
+                class="dark topic_title"
+                :title="list.title"
+              >{{list.title}}</router-link>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -66,11 +98,23 @@ export default {
       userinfo: {}
     };
   },
+  computed: {
+    topicLimit() {
+      if (this.userinfo.recent_topics) {
+        return this.userinfo.recent_topics.slice(0, 5);
+      }
+    },
+    replyTopicLimit() {
+      if (this.userinfo.recent_replies) {
+        return this.userinfo.recent_replies.slice(0, 5);
+      }
+    }
+  },
   methods: {
     getNoReplyData() {
       this.$http
         .get("https://cnodejs.org/api/v1/topics", {
-          page: 1,
+          page: 5,
           limit: 20
         })
         .then(res => {

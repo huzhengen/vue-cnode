@@ -13,7 +13,7 @@ export default new Router({
         path: '/',
         components: {
             main: List,
-            slidebar: SlideBar
+            slidebar: SlideBar,
         }
     }, {
         name: 'post_content',

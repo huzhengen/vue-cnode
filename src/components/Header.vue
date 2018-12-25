@@ -2,27 +2,15 @@
   <div class="header">
     <div class="navbar">
       <div class="container">
-        <a href class="brand">
+        <router-link class="brand" :to="{name:'root'}">
           <img src="../assets/cnodejs_light.svg" alt>
-        </a>
+        </router-link>
         <ul>
           <li>
-            <a href>首页</a>
+            <a href="https://github.com/huzhengen/vue-cnode" target="_blank">源码</a>
           </li>
           <li>
-            <a href>新手入门</a>
-          </li>
-          <li>
-            <a href>API</a>
-          </li>
-          <li>
-            <a href>关于</a>
-          </li>
-          <li>
-            <a href>注册</a>
-          </li>
-          <li>
-            <a href>登录</a>
+            <a href="https://cnodejs.org/api" target="_blank">API</a>
           </li>
         </ul>
       </div>

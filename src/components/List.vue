@@ -2,19 +2,33 @@
   <div class="content">
     <div class="panel">
       <div class="header">
-        <a href="/?tab=all" class="topic-tab current-tab">全部</a>
-        <a href="/?tab=good" class="topic-tab">精华</a>
-        <a href="/?tab=share" class="topic-tab">分享</a>
-        <a href="/?tab=ask" class="topic-tab">问答</a>
-        <a href="/?tab=job" class="topic-tab">招聘</a>
-        <a href="/?tab=dev" class="topic-tab">客户端测试</a>
+        <a
+          @click="changeTab"
+          :class="[{'topic-tab':topic_tab===true,'current-tab':current_tab==='全部'}]"
+        >全部</a>
+        <a
+          @click="changeTab"
+          :class="[{'topic-tab':topic_tab===true,'current-tab':current_tab==='精华'}]"
+        >精华</a>
+        <a
+          @click="changeTab"
+          :class="[{'topic-tab':topic_tab===true,'current-tab':current_tab==='分享'}]"
+        >分享</a>
+        <a
+          @click="changeTab"
+          :class="[{'topic-tab':topic_tab===true,'current-tab':current_tab==='问答'}]"
+        >问答</a>
+        <a
+          @click="changeTab"
+          :class="[{'topic-tab':topic_tab===true,'current-tab':current_tab==='招聘'}]"
+        >招聘</a>
       </div>
       <div class="inner">
-        <div class="topic_list">
-          <div class="loading" v-if="isLoading">
-            <img src="../assets/loading_circle_40b82ef.gif" alt>
-          </div>
-          <div class="cell" v-for="value in listsData" :key="value.id" v-else>
+        <div class="loading" v-if="isLoading">
+          <img src="../assets/loading_circle_40b82ef.gif" alt>
+        </div>
+        <div class="topic_list" v-else>
+          <div class="cell" v-for="value in listsData" :key="value.id">
             <div class="cellleft">
               <router-link
                 :to="{name:'user_info',params:{name:value.author.loginname}}"
@@ -49,6 +63,7 @@
               <span class="last_active_time">{{value.last_reply_at | formatDate}}</span>
             </router-link>
           </div>
+          <Pagination @handleList="renderList"></Pagination>
         </div>
       </div>
     </div>
@@ -56,26 +71,64 @@
 </template>
 
 <script>
+import Pagination from "./Pagination";
 export default {
   name: "Article",
   data() {
     return {
       isLoading: false,
-      listsData: []
+      listsData: [],
+      page: 1,
+      topic_tab: true,
+      current_tab: "全部",
+      tab: "all"
     };
+  },
+  components: {
+    Pagination
   },
   methods: {
     getData() {
       this.$http
         .get("https://cnodejs.org/api/v1/topics", {
-          page: 1,
-          limit: 20
+          params: {
+            page: this.page,
+            limit: 20,
+            tab: this.tab
+          }
         })
         .then(res => {
           this.isLoading = false;
           this.listsData = res.data.data;
         })
         .catch(error => {});
+    },
+    renderList(value) {
+      this.page = value;
+      this.getData();
+    },
+    changeTab(e) {
+      this.current_tab = e.target.innerText;
+      switch (e.target.innerText) {
+        case "全部":
+          this.tab = "all";
+          break;
+        case "精华":
+          this.tab = "good";
+          break;
+        case "分享":
+          this.tab = "share";
+          break;
+        case "问答":
+          this.tab = "ask";
+          break;
+        case "招聘":
+          this.tab = "job";
+          break;
+        default:
+          break;
+      }
+      this.getData();
     }
   },
   beforeMount() {
@@ -95,6 +148,7 @@ export default {
 .topic-tab {
   margin: 0 10px;
   color: #80bd01;
+  cursor: pointer;
 }
 .topic-tab.current-tab {
   background-color: #80bd01;
@@ -150,14 +204,8 @@ export default {
 @media (max-width: 768px) {
   .user_avatar,
   .reply_count,
-  .last_time,
-  .topiclist-tab,
-  .put_good,
-  .put_top {
+  .last_time {
     display: none !important;
-  }
-  .content {
-    margin-right: 0;
   }
 }
 </style>

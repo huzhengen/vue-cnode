@@ -10,15 +10,13 @@
 
 <script>
 import Header from "./components/Header";
-import List from "./components/List";
 import SlideBar from "./components/SlideBar";
 
 export default {
   name: "app",
   components: {
-    Header,
-    List,
-    SlideBar
+    SlideBar,
+    Header
   }
 };
 </script>
@@ -77,7 +75,8 @@ img {
 }
 /* .cell begin */
 .cellleft {
-  max-width: 100%;
+  flex: 1;
+  min-width: 0;
 }
 .cell:first-child {
   border-top: none;
@@ -158,15 +157,7 @@ a.topic_title {
 .panel .inner a {
   color: #778087;
 }
-a.topic_title {
-  max-width: 70%;
-  -o-text-overflow: ellipsis;
-  white-space: nowrap;
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 16px;
-  line-height: 30px;
-}
+
 .sidebar .header {
   color: #51585c;
   border-radius: 3px 3px 0 0;
@@ -220,21 +211,6 @@ ul.unstyled {
 .panel .inner li {
   line-height: 2em;
 }
-.panel .inner .unstyled li div,
-.topic_title_wrapper,
-.user_name,
-a.dark,
-a.topic_title {
-  text-overflow: ellipsis;
-}
-.content .changes,
-.cell,
-.unstyled li div,
-.user_name,
-a.dark,
-a.topic_title {
-  overflow: hidden;
-}
 .sidebar .topic_title {
   max-width: 270px;
   font-size: 14px;
@@ -242,6 +218,15 @@ a.topic_title {
 @media (max-width: 768px) {
   .sidebar {
     display: none;
+  }
+  .main {
+    flex-direction: column;
+  }
+  a.topic_title {
+    max-width: 83%;
+  }
+  .content {
+    margin-right: 0;
   }
 }
 

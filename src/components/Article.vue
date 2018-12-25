@@ -11,7 +11,7 @@
             <span>发布于 {{post.create_at | formatDate}}</span>
             <span>作者
               <router-link
-                to="{name:'user_info',params:{name:post.author.loginname}}"
+                :to="{name:'user_info',params:{name:post.author.loginname}}"
               >{{post.author.loginname}}</router-link>
             </span>
             <span>{{post.visit_count}} 次浏览</span>
@@ -124,7 +124,6 @@ export default {
   margin: 8px 0;
   display: inline-block;
   vertical-align: bottom;
-  width: 75%;
   line-height: 130%;
 }
 .content .changes,
@@ -185,10 +184,12 @@ a.topic_title {
 textarea#title {
   margin-bottom: 1em;
 }
+
 .markdown-text > :first-child,
 .preview > :first-child {
   margin-top: 0;
 }
+
 .cell {
   position: relative;
   padding: 10px 0 10px 10px;
@@ -203,6 +204,7 @@ textarea#title {
   display: inline-block;
   float: left;
 }
+
 .user_avatar img,
 .user_big_avatar img {
   width: 30px;

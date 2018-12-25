@@ -49,9 +49,9 @@
           </router-link>
         </div>
 
-        <div class="cell more">
+        <!-- <div class="cell more">
           <a class="dark" href="/user/lovevfp/topics">查看更多»</a>
-        </div>
+        </div> -->
       </div>
 
       <div class="panel">
@@ -77,9 +77,9 @@
             <span class="last_active_time">{{item.last_reply_at | formatDate}}</span>
           </router-link>
         </div>
-        <div class="cell more">
+        <!-- <div class="cell more">
           <a class="dark" href="/user/lovevfp/replies">查看更多»</a>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
