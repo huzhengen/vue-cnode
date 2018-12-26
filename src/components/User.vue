@@ -31,9 +31,12 @@
         </div>
         <div class="cell" v-for="item in userinfo.recent_topics" :key="item.id">
           <div class="cellleft">
-            <a class="user_avatar pull-left" :href="item.author.loginname">
+            <router-link
+              class="user_avatar pull-left"
+              :to="{name:'user_info',params:{name:item.author.loginname}}"
+            >
               <img :src="item.author.avatar_url" :title="item.author.loginname">
-            </a>
+            </router-link>
             <router-link
               :to="{name:'post_content',params:{id:item.id,name:item.author.loginname}}"
               class="topic_title"
@@ -51,7 +54,7 @@
 
         <!-- <div class="cell more">
           <a class="dark" href="/user/lovevfp/topics">查看更多»</a>
-        </div> -->
+        </div>-->
       </div>
 
       <div class="panel">
@@ -60,9 +63,12 @@
         </div>
         <div class="cell" v-for="item in userinfo.recent_replies" :key="item.id">
           <div class="cellleft">
-            <a class="user_avatar pull-left" :href="item.author.loginname">
+            <router-link
+              class="user_avatar pull-left"
+              :to="{name:'user_info',params:{name:item.author.loginname}}"
+            >
               <img :src="item.author.avatar_url" :title="item.author.loginname">
-            </a>
+            </router-link>
             <router-link
               :to="{name:'post_content',params:{id:item.id,name:item.author.loginname}}"
               class="topic_title"
@@ -79,7 +85,7 @@
         </div>
         <!-- <div class="cell more">
           <a class="dark" href="/user/lovevfp/replies">查看更多»</a>
-        </div> -->
+        </div>-->
       </div>
     </div>
   </div>
@@ -93,6 +99,11 @@ export default {
       isLoading: false,
       userinfo: {}
     };
+  },
+  watch: {
+    $route(to, from) {
+      this.getUserData();
+    }
   },
   methods: {
     getUserData() {

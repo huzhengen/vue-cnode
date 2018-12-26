@@ -101,7 +101,9 @@ export default {
           this.isLoading = false;
           this.listsData = res.data.data;
         })
-        .catch(error => {});
+        .catch(error => {
+          console.log(error.response);
+        });
     },
     renderList(value) {
       this.page = value;

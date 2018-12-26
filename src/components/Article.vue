@@ -84,10 +84,11 @@ export default {
         .then(res => {
           this.isLoading = false;
           this.post = res.data.data;
-          console.log(this.post.author.loginname);
           bus.$emit("loginname", this.post.author.loginname);
         })
-        .catch(error => {});
+        .catch(error => {
+          console.log(error.response);
+        });
     }
   },
   watch: {
@@ -160,34 +161,6 @@ a.topic_title {
 }
 .topic_content {
   margin: 0 10px;
-}
-.markdown-text p,
-.preview p {
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: -pre-wrap;
-  white-space: -o-pre-wrap;
-  word-wrap: break-word;
-  line-height: 2em;
-  margin: 1em 0;
-}
-.preview p,
-.reply_content p,
-.reply_form p,
-.topic_content p {
-  font-size: 15px;
-  line-height: 1.7em;
-  overflow: auto;
-}
-.markdown-text > :last-child,
-.preview > :last-child,
-textarea#title {
-  margin-bottom: 1em;
-}
-
-.markdown-text > :first-child,
-.preview > :first-child {
-  margin-top: 0;
 }
 
 .cell {
@@ -266,23 +239,44 @@ a {
   color: #08c;
   text-decoration: none;
 }
-div pre.prettyprint {
-  font-size: 14px;
-  border-radius: 0;
-  padding: 0 15px;
-  border: none;
-  margin: 20px -10px;
-  border-width: 1px 0;
-  background: #f7f7f7;
-  -o-tab-size: 4;
-  -moz-tab-size: 4;
-  tab-size: 4;
+</style>
+<style>
+/* markdown-text begin */
+.markdown-text p,
+.preview p {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+  line-height: 2em;
+  margin: 1em 0;
+}
+
+.preview p,
+.reply_content p,
+.reply_form p,
+.topic_content p {
+  font-size: 15px;
+  line-height: 1.7em;
+  overflow: auto;
+}
+.markdown-text > :last-child,
+.preview > :last-child,
+textarea#title {
+  margin-bottom: 1em;
+}
+
+.markdown-text > :first-child,
+.preview > :first-child {
+  margin-top: 0;
 }
 pre code {
   color: inherit;
   white-space: pre-wrap;
   background-color: transparent;
 }
+
 fieldset,
 legend,
 pre code {
@@ -308,4 +302,17 @@ q:after,
 q:before {
   content: "";
 }
+div pre.prettyprint {
+  font-size: 14px;
+  border-radius: 0;
+  padding: 0 15px;
+  border: none;
+  margin: 20px -10px;
+  border-width: 1px 0;
+  background: #f7f7f7;
+  -o-tab-size: 4;
+  -moz-tab-size: 4;
+  tab-size: 4;
+}
+/* markdown-text end */
 </style>

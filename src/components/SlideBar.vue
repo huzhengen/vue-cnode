@@ -35,7 +35,7 @@
       </div>
       <div class="inner">
         <ul class="unstyled">
-          <li v-for="list in topicLimit" :key="list.id">
+          <li v-for="list in topicLimit" :key="list.index">
             <div>
               <router-link
                 :to="{name:'post_content',params:{id:list.id,name:list.author.loginname}}"
@@ -54,7 +54,7 @@
       </div>
       <div class="inner">
         <ul class="unstyled">
-          <li v-for="list in replyTopicLimit" :key="list.id">
+          <li v-for="list in replyTopicLimit" :key="list.index">
             <div>
               <router-link
                 :to="{name:'post_content',params:{id:list.id,name:list.author.loginname}}"
@@ -73,7 +73,7 @@
       </div>
       <div class="inner">
         <ul class="unstyled">
-          <li v-for="value in noReply" :key="value.id">
+          <li v-for="value in noReply" :key="value.index">
             <div>
               <router-link
                 :to="{name:'post_content',params:{id:value.id,name:value.author.loginname}}"
@@ -110,6 +110,12 @@ export default {
       }
     }
   },
+  watch: {
+    $route(to, from) {
+      this.getNoReplyData();
+      this.getUserData();
+    }
+  },
   methods: {
     getNoReplyData() {
       this.$http
@@ -125,30 +131,41 @@ export default {
             }
           }
         })
-        .catch(error => {});
+        .catch(error => {
+          console.log(error.response);
+        });
+    },
+    getUserData() {
+      let self = this;
+      if (this.$route.fullPath.indexOf("user") !== -1) {
+        let value = this.$route.params.name;
+        this.$http
+          .get(`https://cnodejs.org/api/v1/user/${value}`)
+          .then(res => {
+            this.userinfo = res.data.data;
+          })
+          .catch(error => {
+            console.log(error.response);
+          });
+      } else if (this.$route.name === "root") {
+        this.userinfo = {};
+      } else {
+        bus.$on("loginname", value => {
+          this.$http
+            .get(`https://cnodejs.org/api/v1/user/${value}`)
+            .then(res => {
+              this.userinfo = res.data.data;
+            })
+            .catch(error => {
+              console.log(error.response);
+            });
+        });
+      }
     }
   },
   beforeMount() {
     this.getNoReplyData();
-    let self = this;
-    if (this.$route.fullPath.indexOf("user") !== -1) {
-      let value = this.$route.params.name;
-      self.$http
-        .get(`https://cnodejs.org/api/v1/user/${value}`)
-        .then(res => {
-          self.userinfo = res.data.data;
-        })
-        .catch(error => {});
-    } else {
-      bus.$on("loginname", function(value) {
-        self.$http
-          .get(`https://cnodejs.org/api/v1/user/${value}`)
-          .then(res => {
-            self.userinfo = res.data.data;
-          })
-          .catch(error => {});
-      });
-    }
+    this.getUserData();
   }
 };
 </script>
