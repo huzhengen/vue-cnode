@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content" v-wechat-title="'@'+userinfo.loginname+'的个人主页'">
     <div class="loading" v-if="isLoading">
       <img src="../assets/loading_circle_40b82ef.gif" alt>
     </div>
@@ -110,7 +110,6 @@ export default {
       this.$http
         .get(`https://cnodejs.org/api/v1/user/${this.$route.params.name}`)
         .then(res => {
-          console.log(res.data.data);
           this.isLoading = false;
           this.userinfo = res.data.data;
         })
@@ -138,6 +137,7 @@ export default {
 .typeahead {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
+  border-radius: 4px;
 }
 .breadcrumb {
   padding: 8px 15px;

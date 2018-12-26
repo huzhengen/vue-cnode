@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import axios from 'axios'
 import router from './router/index'
+import VueWechatTitle from 'vue-wechat-title'
 
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
@@ -42,6 +43,14 @@ Vue.filter('tabFormater', (value) => {
     } else {
         return '招聘'
     }
+})
+
+Vue.use(VueWechatTitle)
+router.beforeEach((to, from, next) => {
+    if (to.meta.title) {
+        document.title = to.meta.title;
+    }
+    next();
 })
 
 new Vue({

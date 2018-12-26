@@ -14,6 +14,9 @@ export default new Router({
         components: {
             main: List,
             slidebar: SlideBar,
+        },
+        meta: {
+            title: 'Vue仿CNode社区网站'
         }
     }, {
         name: 'post_content',

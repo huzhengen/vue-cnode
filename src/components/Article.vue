@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content" v-wechat-title="post.title">
     <div class="loading" v-if="isLoading">
       <img src="../assets/loading_circle_40b82ef.gif" alt>
     </div>
@@ -74,7 +74,8 @@ export default {
   data() {
     return {
       isLoading: false,
-      post: {}
+      post: {},
+      title: ""
     };
   },
   methods: {
@@ -84,6 +85,7 @@ export default {
         .then(res => {
           this.isLoading = false;
           this.post = res.data.data;
+          this.title = this.post.title;
           bus.$emit("loginname", this.post.author.loginname);
         })
         .catch(error => {
