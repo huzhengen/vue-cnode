@@ -21,7 +21,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 body {
   margin: 0;
   padding: 0;
@@ -81,31 +81,39 @@ img {
 .cell:first-child {
   border-top: none;
 }
-.cell a {
-  color: #778087;
+.cell {
+  a {
+    color: #778087;
+  }
+  .user_avatar {
+    > img {
+      width: 30px;
+      height: 30px;
+      border-radius: 3px;
+      vertical-align: middle;
+    }
+  }
+  .reply_count {
+    width: 70px;
+    display: inline-block;
+    text-align: center;
+  }
+  .count_of_replies {
+    color: #9e78c0;
+  }
+  .count_seperator {
+    font-size: 10px;
+    margin: 0 1px;
+  }
+  .count_of_visits {
+    font-size: 10px;
+    color: #b4b4b4;
+  }
 }
-.cell .user_avatar > img {
-  width: 30px;
-  height: 30px;
-  border-radius: 3px;
-  vertical-align: middle;
+.cell:hover {
+  background: #f5f5f5;
 }
-.cell .reply_count {
-  width: 70px;
-  display: inline-block;
-  text-align: center;
-}
-.cell .count_of_replies {
-  color: #9e78c0;
-}
-.cell .count_seperator {
-  font-size: 10px;
-  margin: 0 1px;
-}
-.cell .count_of_visits {
-  font-size: 10px;
-  color: #b4b4b4;
-}
+
 .last_time .user_small_avatar {
   height: 18px;
   width: 18px;
@@ -113,9 +121,7 @@ img {
   margin-right: 0.5em;
   border-radius: 3px;
 }
-.cell:hover {
-  background: #f5f5f5;
-}
+
 a.topic_title:visited {
   color: #888;
 }
@@ -141,30 +147,28 @@ a.topic_title {
   font-size: 14px;
   float: right;
   margin-bottom: 20px;
-}
-.sidebar .panel {
-  font-size: 13px;
-}
-.panel {
-  margin-bottom: 13px;
-}
-.panel .inner {
-  padding: 10px;
-  border-radius: 0 0 3px 3px;
-  background-color: #fff;
-  font-size: 13px;
-}
-.panel .inner a {
-  color: #778087;
+  .panel {
+    font-size: 13px;
+    margin-bottom: 13px;
+    .inner {
+      padding: 10px;
+      border-radius: 0 0 3px 3px;
+      background-color: #fff;
+      font-size: 13px;
+      a {
+        color: #778087;
+      }
+    }
+  }
+  .header {
+    color: #51585c;
+    border-radius: 3px 3px 0 0;
+    .col_fade {
+      color: #444;
+    }
+  }
 }
 
-.sidebar .header {
-  color: #51585c;
-  border-radius: 3px 3px 0 0;
-}
-.header .col_fade {
-  color: #444;
-}
 a.dark,
 a.dark:active,
 a.dark:link,
